@@ -82,3 +82,8 @@ sed -i.back -e '/docker build/a\
 
 echo "# build tableau server docker image"
 ./build-image --accepteula -i ${TABLEAU_SERVER_RPM} -e env.txt
+
+DOCKER_IMAGE_VERSION=$(docker image ls  --format '{{.Repository}}:{{.Tag}}' tableau_server_image)
+
+echo "${DOCKER_IMAGE_VERSION}" > BUILD_VERSION
+cat BUILD_VERSION
