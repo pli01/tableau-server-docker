@@ -31,3 +31,15 @@ jobs:
       - name: build and tests
         run: |
           ci/run-tests.sh
+      - name: Docker push version
+        if: ( success() && startsWith(github.ref,'refs/heads/main') )
+        env:
+          DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+          DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
+        run: |
+          echo "## $GITHUB_REPOSITORY ##"
+          # push image on ghcr.io if success
+          ci/push.sh
+          # teardown  (clean all)
+          docker system prune -af
+          docker logout
