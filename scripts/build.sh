@@ -13,6 +13,8 @@ JDBC_POSTGRESQL_VERSION=${JDBC_POSTGRESQL_VERSION:-42.2.14}
 JDBC_POSTGRESQL=postgresql-${JDBC_POSTGRESQL_VERSION}.jar
 JDBC_POSTGRESQL_URL=https://downloads.tableau.com/drivers/linux/postgresql/${JDBC_POSTGRESQL}
 
+root_dir=$(pwd)
+
 rm -rf  build-dir
 mkdir build-dir
 
@@ -85,5 +87,6 @@ echo "# build tableau server docker image"
 
 DOCKER_IMAGE_VERSION=$(docker image ls  --format '{{.Repository}}:{{.Tag}}' tableau_server_image)
 
+cd $root_dir
 echo "${DOCKER_IMAGE_VERSION}" > BUILD_VERSION
 cat BUILD_VERSION
