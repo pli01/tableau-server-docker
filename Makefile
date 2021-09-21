@@ -63,6 +63,6 @@ push-image-tableau: BUILD_VERSION
 pull-image: registry-login pull-image-tableau-latest
 pull-image-%-latest:
 	image_name=$$(docker-compose $(DC_TABLEAU_RUN_CONF) config | python -c 'import sys, yaml, json; cfg = json.loads(json.dumps(yaml.load(sys.stdin, Loader=yaml.SafeLoader), sys.stdout, indent=4)); print cfg["services"]["$*"]["image"]') ; \
-         echo docker pull ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/$$image_name ; \
-         echo docker tag ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/$$image_name $$image_name
+         docker pull ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/$$image_name ; \
+         docker tag ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/$$image_name $$image_name
 
