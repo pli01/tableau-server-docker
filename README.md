@@ -14,6 +14,7 @@ export TSM_REMOTE_PASSWORD="YYYY"
 export PUBLIC_HOST="My-public-ip"
 make pull-image
 make up
+# BE Patient, the container will take 20mn to be up and running !
 ```
 
 * This CI workflows run the server-in-container_setup-tool script and build docker image for tableau server [details in .github](.github/workflows/main.yml)
