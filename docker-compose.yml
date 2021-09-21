@@ -1,0 +1,21 @@
+version: '3.5'
+services:
+  tableau:
+     hostname: localhost
+     volumes:
+        - $(pwd)/remote-user-secret:/docker/config/remote-user-secret
+        - $(pwd)/config.json:/docker/config/config.json:ro
+        - ts_container_data:/var/opt/tableau
+     ports:
+        - "${TABLEAU_PORT:-80}:8080"
+        - "8850:8850"
+     image: tableau_server_image:${TABLEAU_SERVER_IMAGE_VERSION:-latest}
+     environment:
+        - LICENSE_KEY=${LICENSE_KEY}
+        - TABLEAU_USERNAME=${TABLEAU_USERNAME:-admin}
+        - TABLEAU_PASSWORD=${TABLEAU_PASSWORD:-admin}
+        - HTTP_PROXY=$http_proxy
+        - HTTPS_PROXY=$https_proxy
+        - NO_PROXY=$no_proxy
+volumes:
+  ts_container_data:
