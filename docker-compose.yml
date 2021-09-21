@@ -3,8 +3,8 @@ services:
   tableau:
      hostname: localhost
      volumes:
-        - $(pwd)/remote-user-secret:/docker/config/remote-user-secret
-        - $(pwd)/config.json:/docker/config/config.json:ro
+        - ./remote-user-secret:/docker/config/remote-user-secret
+        - ./config.json:/docker/config/config.json:ro
         - ts_container_data:/var/opt/tableau
      ports:
         - "${TABLEAU_PORT:-80}:8080"
