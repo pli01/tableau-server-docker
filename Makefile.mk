@@ -34,7 +34,7 @@ DC_TABLEAU_RUN_CONF += -f ${DC_TABLEAU_CUSTOM_CONF}
 endif
 
 DOCKER_REGISTRY ?= ghcr.io
-DOCKER_REPOSITORY ?= tableau-server-docker
+DOCKER_REPOSITORY ?= pli01/tableau-server-docker
 #
 # tableau server
 #
