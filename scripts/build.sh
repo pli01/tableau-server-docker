@@ -51,6 +51,7 @@ mkdir -p /opt/tableau/tableau_driver/jdbc
 cp /docker/customer-files/${JDBC_POSTGRESQL} /opt/tableau/tableau_driver/jdbc/${JDBC_POSTGRESQL}
 yum install -y /docker/customer-files/${JDBC_MYSQL}
 yum install -y /docker/customer-files/${JDBC_VERTICA}
+cp -a /opt/vertica/java/vertica-jdbc.jar /opt/tableau/tableau_driver/jdbc/
 EOF
 
 # env.txt
