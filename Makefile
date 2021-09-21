@@ -50,8 +50,13 @@ registry-login:
 registry-logout:
 	@[ -n "${DOCKER_REGISTRY}" ] && docker logout ${DOCKER_REGISTRY} || true
 
-push-image: registry-login push-image-tableau
-push-image-%: BUILD_VERSION
+push-image: registry-login push-image-tableau push-image-tableau-latest
+push-image-tableau-latest: BUILD_VERSION
+	image_name=$$(cat BUILD_VERSION | cut -f1 -d":") ; \
+	image_version=$$(cat BUILD_VERSION | cut -f2 -d":") ; \
+	docker tag $$image_name:$$image_version ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/$$image_name:latest ; \
+	docker push ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/$$image_name:latest
+push-image-tableau: BUILD_VERSION
 	image_name=$$(cat BUILD_VERSION) ; \
          docker tag $$image_name ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/$$image_name ; \
          docker push ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/$$image_name
