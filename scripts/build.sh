@@ -12,6 +12,12 @@ TABLEAU_SERVER_RPM_URL=https://downloads.tableau.com/esdalt/${TABLEAU_SERVER_CON
 JDBC_POSTGRESQL_VERSION=${JDBC_POSTGRESQL_VERSION:-42.2.14}
 JDBC_POSTGRESQL=postgresql-${JDBC_POSTGRESQL_VERSION}.jar
 JDBC_POSTGRESQL_URL=https://downloads.tableau.com/drivers/linux/postgresql/${JDBC_POSTGRESQL}
+JDBC_MYSQL_VERSION=${JDBC_MYSQL_VERSION:-8.0.26-1}
+JDBC_MYSQL=mysql-connector-odbc-${JDBC_MYSQL_VERSION}.el7.x86_64.rpm
+JDBC_MYSQL_URL=https://dev.mysql.com/get/Downloads/Connector-ODBC/8.0/${JDBC_MYSQL}
+JDBC_VERTICA_VERSION=${JDBC_VERTICA_VERSION:-10.1.1-0}
+JDBC_VERTICA=vertica-client-${JDBC_VERTICA_VERSION}.x86_64.rpm
+JDBC_VERTICA_URL=https://www.vertica.com/client_drivers/10.1.x/${JDBC_VERTICA_VERSION}/${JDBC_VERTICA}
 
 root_dir=$(pwd)
 
@@ -32,12 +38,19 @@ curl -L -O ${TABLEAU_SERVER_RPM_URL}
 
 echo "# download ${JDBC_POSTGRESQL_URL} "
 ( cd customer-files/ && curl -LO ${JDBC_POSTGRESQL_URL} )
+echo "# download ${JDBC_MYSQL_URL} "
+( cd customer-files/ && curl -LO ${JDBC_MYSQL_URL} )
+echo "# download ${JDBC_VERTICA_URL} "
+( cd customer-files/ && curl -LO ${JDBC_VERTICA_URL} )
+
 
 cat <<EOF > customer-files/setup-script
 #!/bin/bash
 # Driver installation and other artifact installation script
 mkdir -p /opt/tableau/tableau_driver/jdbc
 cp /docker/customer-files/${JDBC_POSTGRESQL} /opt/tableau/tableau_driver/jdbc/${JDBC_POSTGRESQL}
+yum install -y /docker/customer-files/${JDBC_MYSQL}
+yum install -y /docker/customer-files/${JDBC_VERTICA}
 EOF
 
 # env.txt
