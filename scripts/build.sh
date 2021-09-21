@@ -13,7 +13,7 @@ JDBC_POSTGRESQL_VERSION=${JDBC_POSTGRESQL_VERSION:-42.2.14}
 JDBC_POSTGRESQL=postgresql-${JDBC_POSTGRESQL_VERSION}.jar
 JDBC_POSTGRESQL_URL=https://downloads.tableau.com/drivers/linux/postgresql/${JDBC_POSTGRESQL}
 JDBC_MYSQL_VERSION=${JDBC_MYSQL_VERSION:-8.0.26-1}
-JDBC_MYSQL=mysql-connector-odbc-setup-${JDBC_MYSQL_VERSION}.el7.x86_64.rpm
+JDBC_MYSQL=mysql-connector-odbc-${JDBC_MYSQL_VERSION}.el7.x86_64.rpm
 JDBC_MYSQL_URL=https://dev.mysql.com/get/Downloads/Connector-ODBC/8.0/${JDBC_MYSQL}
 
 root_dir=$(pwd)
