@@ -33,11 +33,20 @@ ifneq ("$(wildcard ${DC_TABLEAU_CUSTOM_CONF})","")
 DC_TABLEAU_RUN_CONF += -f ${DC_TABLEAU_CUSTOM_CONF}
 endif
 
+DOCKER_REGISTRY ?= ghcr.io
+DOCKER_REPOSITORY ?= pli01/tableau-server-docker
 #
-# tableau server
+# tableau server build version
 #
 TABLEAU_SERVER_IMAGE_VERSION ?= latest
 TABLEAU_SERVER_CONTAINER_SETUP_TOOL_VERSION ?= 2021.2.0
 TABLEAU_SERVER_RPM_VERSION ?= 2021-2-0
 JDBC_POSTGRESQL_VERSION ?= 42.2.14
 TABLEAU_PORT ?= 80
+
+#
+# tableau server run
+#
+LICENSE_KEY ?=
+TSM_REMOTE_PASSWORD ?=
+PUBLIC_HOST ?= localhost
