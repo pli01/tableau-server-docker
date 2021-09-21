@@ -3,7 +3,6 @@ services:
   tableau:
      hostname: localhost
      volumes:
-        - ./remote-user-secret:/docker/config/remote-user-secret
         - ./config.json:/docker/config/config.json:ro
         - ts_container_data:/var/opt/tableau
      ports:
@@ -14,6 +13,7 @@ services:
         - LICENSE_KEY=${LICENSE_KEY}
         - TABLEAU_USERNAME=${TABLEAU_USERNAME:-admin}
         - TABLEAU_PASSWORD=${TABLEAU_PASSWORD:-admin}
+        - TSM_REMOTE_PASSWORD=${TSM_REMOTE_PASSWORD:-XXX-CHANGE-ME}
         - HTTP_PROXY=$http_proxy
         - HTTPS_PROXY=$https_proxy
         - NO_PROXY=$no_proxy

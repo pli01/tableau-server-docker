@@ -40,8 +40,18 @@ endif
 build:
 	@./scripts/build.sh
 
-up:
+pre-up: config.json.tmpl
+	@if [ -z "${LICENSE_KEY}" -o -z "${TSM_REMOTE_PASSWORD}" -o -z "${PUBLIC_HOST}" ] ; then  exit 1 ; fi
+	if [ ! -f config.json.tmpl ] ; then exit 1 ; fi
+	envsubst < config.json.tmpl > config.json
+
+up: pre-up
 	docker-compose ${DC_TABLEAU_RUN_CONF} up  --no-build -d
+
+down:
+	docker-compose ${DC_TABLEAU_RUN_CONF} down
+
+restart: down up
 
 registry-login:
 	@if [ -z "${DOCKER_REGISTRY_TOKEN}" -a -z "${DOCKER_REGISTRY_USERNAME}" ] ; then echo "ERROR: DOCKER_REGISTRY_TOKEN and DOCKER_REGISTRY_USERNAME not defined" ; exit 1 ; fi
