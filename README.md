@@ -1,12 +1,20 @@
 # tableau-server-docker
 
-Automatic build docker image from official tableau server-in-container_setup-tool steps:
+[![CI](https://github.com/pli01/tableau-server-docker/actions/workflows/main.yml/badge.svg)](https://github.com/pli01/tableau-server-docker/actions/workflows/main.yml)
+
+Automatic built docker image from official tableau server-in-container_setup-tool steps:
 
 * https://help.tableau.com/current/server-linux/en-us/server-in-container_quickstart.htm
 * https://help.tableau.com/current/server-linux/en-us/server-in-container_setup-tool.htm
 
+This docker image include the following drivers:
+* Mysql
+* Postgresql
+* Vertica
+
 ## Run it
 
+* PreReq: docker installed
 * From your side, you only need to pull docker image and up the tableau container with your license and settings
 ```
 export LICENSE_KEY="XXXX"
