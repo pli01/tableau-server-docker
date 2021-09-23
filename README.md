@@ -1,6 +1,8 @@
-# tableau-server-docker
+# Automatic built docker image from official tableau-server in-container_setup-tool steps
 
 [![CI](https://github.com/pli01/tableau-server-docker/actions/workflows/main.yml/badge.svg)](https://github.com/pli01/tableau-server-docker/actions/workflows/main.yml)
+
+This repository contains resources for building the official tableau-server containers published to ghcr.io.
 
 Automatic built docker image from official tableau server-in-container_setup-tool steps:
 
