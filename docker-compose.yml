@@ -1,7 +1,16 @@
 version: '3.5'
+networks:
+  tableau-network:
+    driver: bridge
+    driver_opts:
+      com.docker.network.driver.mtu: 1450
+
+
 services:
   tableau:
      hostname: localhost
+     networks:
+       - tableau-network
      volumes:
         - ./config.json:/docker/config/config.json:ro
         - ts_container_data:/var/opt/tableau
